@@ -25,10 +25,12 @@ export const login = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      httpOnly: true,
-       secure: true,
-       sameSite: "none" 
-    });
+    httpOnly: true,
+    secure: true,        
+    sameSite: "lax",     
+    domain: ".arlenova.com.ar", 
+    maxAge: 24 * 60 * 60 * 1000 
+});
     
     return sendResponse(res, 200, "Login exitoso");
   } catch (error) {
