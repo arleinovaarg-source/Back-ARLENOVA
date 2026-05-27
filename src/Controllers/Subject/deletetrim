@@ -1,0 +1,23 @@
+export const deleteTrimester = async (req, res) => {
+  try {
+    const { subjectId, trimesterNumber } = req.body; // El número que quieren borrar
+    
+    // 1. Buscamos la materia para saber cuántos tiene habilitados
+    const subject = await Subject.findById(subjectId);
+    
+    // 2. REGLA DE ORO: Solo permitimos borrar si es el último
+    if (trimesterNumber !== subject.activeTrimesters) {
+      return sendResponse(res, 400, "Solo puedes borrar el último trimestre habilitado.");
+    }
+
+    // 3. Si pasa la validación, procedemos a borrar
+    // Aquí borrarías las notas del trimestre y actualizarías el contador
+    await Grade.deleteMany({ subject: subjectId, trimester: trimesterNumber });
+    subject.activeTrimesters -= 1;
+    await subject.save();
+
+    return sendResponse(res, 200, "Trimestre eliminado correctamente");
+  } catch (error) {
+    return sendResponse(res, 500, error.message);
+  }
+};
