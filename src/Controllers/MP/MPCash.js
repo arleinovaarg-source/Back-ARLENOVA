@@ -61,7 +61,7 @@ export const mpCash = async (req, res) => {
           failure: `https://arlenova.com.ar/PagoFallido`,
           pending: `https://arlenova.com.ar/PagoError`,
         },
-        notification_url: `${process.env.BACKEND_URL}/api/v1/mp/webhook`,
+        notification_url: `${process.env.BACKEND_URL}/api/v1/webhook`,
         auto_return: "approved",
       },
     });
