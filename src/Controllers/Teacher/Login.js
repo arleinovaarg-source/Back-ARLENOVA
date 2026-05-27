@@ -2,7 +2,7 @@ import Teacher from "../../Models/Teacher.js";
 import { sendResponse } from "../../Hooks/responseHandler.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-const isProduction = process.env.NODE_ENV === "production";
+
 
 export const login = async (req, res) => {
   try {
@@ -26,8 +26,8 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-       secure: isProduction, 
-       sameSite: isProduction ? "none" : "lax",
+       secure: true
+       sameSite: "none" 
     });
     
     return sendResponse(res, 200, "Login exitoso");
