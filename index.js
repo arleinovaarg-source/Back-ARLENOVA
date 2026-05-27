@@ -41,9 +41,10 @@ app.use(
   Attendance,
   studentRoutes,
   quarterRoutes,
+  MercadoPago
 );
 
-app.use("/api/v1/mp", MercadoPago);
+
 
 app.get("/", (req, res) => {
   res.send("API running");
