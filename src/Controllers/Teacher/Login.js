@@ -23,7 +23,6 @@ export const login = async (req, res) => {
     const token = jwt.sign({ id: teacher._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
-
     res.cookie("token", token, {
     httpOnly: true,
     secure: true,        
@@ -31,6 +30,7 @@ export const login = async (req, res) => {
     domain: ".arlenova.com.ar", 
     maxAge: 24 * 60 * 60 * 1000 
 });
+
     
     return sendResponse(res, 200, "Login exitoso");
   } catch (error) {
